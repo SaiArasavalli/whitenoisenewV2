@@ -1,0 +1,132 @@
+<mat-dialog-content class="bg-pre">
+  <h4 class="text-center mb-5">New Order</h4>
+  <form
+    class="d-flex flex-column gap-3"
+    [formGroup]="orderForm"
+    (ngSubmit)="addOrder()"
+  >
+    <div>
+      <mat-form-field appearance="outline" color="accent" class="bg-pre w-100">
+        <mat-label>Customer</mat-label>
+        <mat-select formControlName="customer">
+          <mat-option
+            *ngFor="let customer of customers"
+            [value]="customer.name"
+            class="bg-dark"
+          >
+            {{ customer.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <button
+        mat-raised-button
+        type="button"
+        class="bg-sec p-4 w-100"
+        (click)="addItem()"
+      >
+        <div class="d-flex align-items-center gap-2">
+          <span>Add Item</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class="bi bi-plus-circle-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"
+            />
+          </svg>
+        </div>
+      </button>
+    </div>
+    <div formArrayName="items">
+      <div
+        *ngFor="let item of items.controls; let i = index"
+        [formGroupName]="i"
+        class="d-flex align-items-center gap-2 my-2"
+      >
+        <mat-form-field
+          appearance="outline"
+          color="accent"
+          class="bg-pre w-100"
+        >
+          <mat-label>Item</mat-label>
+          <mat-select formControlName="name">
+            <mat-option
+              *ngFor="let item of menu"
+              [value]="item.name"
+              class="bg-pre"
+            >
+              {{ item.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          color="accent"
+          class="bg-pre w-100"
+        >
+          <mat-label>Quantity</mat-label>
+          <input matInput type="number" formControlName="quantity" />
+        </mat-form-field>
+        <button mat-button type="button" (click)="removeItem(i)">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            fill="currentColor"
+            class="bi bi-x-circle-fill text-danger"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" color="accent" class="bg-pre w-100">
+        <mat-label>Payment</mat-label>
+        <mat-select formControlName="payment">
+          <mat-option class="bg-pre" value="PAID"> PAID </mat-option>
+          <mat-option class="bg-pre" value="PENDING"> PENDING </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" color="accent" class="bg-pre w-100">
+        <mat-label>Comment</mat-label>
+        <textarea matInput formControlName="comment"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" color="accent" class="bg-pre w-100">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="created" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <button
+      mat-raised-button
+      class="bg-violet p-4 w-100"
+      *ngIf="!submitting"
+      [disabled]="orderForm.invalid"
+    >
+      Add
+    </button>
+    <button mat-raised-button class="bg-violet p-4 w-100" *ngIf="submitting">
+      <div class="spinner-border spinner-border-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </button>
+  </form>
+</mat-dialog-content>

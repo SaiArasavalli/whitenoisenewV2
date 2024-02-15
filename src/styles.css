@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  font-family: "Rubik", sans-serif !important;
+}
+
+body {
+  color: #dee2e6;
+  background: #1b1f22;
+}
+
+.bg-sec {
+  background: #2b3035 !important;
+}
+
+.bg-pre {
+  background: #1b1f22 !important;
+}
+
+.bg-violet {
+  background: #6610f2 !important;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.mat-mdc-select-panel {
+  padding: 0 !important;
+}
+
+.table-container {
+  height: 580px;
+  overflow: auto;
+}
+
+.table-container-sm {
+  height: 400px;
+  overflow: auto;
+}
+
+th,
+td {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+th {
+  font-weight: bold !important;
+}

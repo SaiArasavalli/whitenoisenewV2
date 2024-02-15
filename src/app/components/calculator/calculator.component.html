@@ -1,0 +1,40 @@
+<div
+  class="vh-100 d-flex flex-column align-items-center justify-content-center gap-3"
+>
+  <mat-card class="col-4 bg-dark p-4 rounded-3">
+    <form
+      class="d-flex flex-column align-items-center gap-3"
+      [formGroup]="calculatorForm"
+      (ngSubmit)="calculate()"
+    >
+      <mat-form-field appearance="outline" color="accent" class="bg-pre w-100">
+        <mat-label>Board</mat-label>
+        <mat-select formControlName="boardName">
+          <mat-option
+            class="bg-dark"
+            [value]="board.name"
+            *ngFor="let board of boards"
+          >
+            {{ board.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent" class="bg-pre w-100">
+        <mat-label>Minutes</mat-label>
+        <input matInput type="number" formControlName="minutes" min="1" />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        class="p-4 w-100 bg-violet"
+        [disabled]="calculatorForm.invalid"
+      >
+        Calculate
+      </button>
+    </form>
+  </mat-card>
+  <mat-card class="col-4 bg-dark p-3 rounded-3">
+    <h2 class="fw-bold text-center">
+      {{ amount | currency : "INR" }}
+    </h2>
+  </mat-card>
+</div>
